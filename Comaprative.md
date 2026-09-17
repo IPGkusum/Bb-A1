@@ -15,9 +15,13 @@ sort -k4 -n -r $PREFIX _specific_min.txt > $PREFIX _specific_min_sort.txt
 
 ## local blast
 makeblastdb -in $Reference_genome.fasta -out $DATABASE -dbtype 'nucl'
+
 blastn -task blastn -query $specific_region -db $DATABASE -outfmt "6 qacc sacc evalue bitscore length qcovs pident" -out $OUT
+
 sort -k6 -n $OUT > $OUT_sort.txt
+
 awk '{if($6<=20) print $0}’ $OUT_sort.txt > $OUT20.txt
+
 awk '{print $1}' $OUT20.txt | uniq > $OUT_uniq.txt
 
 ## Common uniq region
