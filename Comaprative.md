@@ -34,4 +34,4 @@ bedtools multiinter -i ${file%.bed}_merged.bed > common_regions.bed
 awk '$4 == 5' common_regions.bed > A1_common_regions.bed
 
 awk '{print $1 ":" $2+1 "-" $3}' 157final_common_regions.bed > A1_common_regions.txt
-<img width="467" height="590" alt="image" src="https://github.com/user-attachments/assets/b36b0307-0b06-4a24-b686-b602426f266a" />
+
