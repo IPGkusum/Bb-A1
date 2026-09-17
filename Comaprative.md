@@ -7,10 +7,13 @@ show-coords -rcl $PREFIX.delta > $PREFIX.coords
 awk '$19 && $4 && $5 {OFS="\t"; print $19, ($4 < $5 ? $4-1 : $5-1), ($4 < $5 ? $5 : $4)}' $PREFIX.coords | sort -k1,1 -k2,2n > $PREFIX_out.bed
 
 seqkit fx2tab $genome.fasta -l -n > genome.SeqLen
+
 awk 'OFS="\t"{print $1,0,$2}' genome.SeqLen > genome.bed
 
 bedtools subtract -a $ genome.bed -b $PREFIX_out.bed > $ PREFIX_specific.bed
+
 awk '{print $1,$2,$3,$3 - $2}' $PREFIX_specific.bed > $PREFIX _specific_min.txt
+
 sort -k4 -n -r $PREFIX _specific_min.txt > $PREFIX _specific_min_sort.txt
 
 ## local blast
